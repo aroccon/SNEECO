@@ -17,9 +17,16 @@ sed -i "" "s/fluid_flag/$fluid_flag/g" ./input.f90
 sed -i "" "s/vap_flag/$vap_flag/g"     ./input.f90
 sed -i "" "s/dump/$dump/g"             ./input.f90
 sed -i "" "s/n_t/$n_t/g"               ./input.f90
-sed -i "" "s/n_p/$n_p/g"               ./input.f90
-### set module.f90
+### copy input in paraview
+cp input.f90 /paraview/input.f90
+### set module.f90 (main code)
+cp module_to_edit.f90 module.f90
 sed -i "" "s/n_pppppppp/$n_p/g"        ./module.f90
+### set module.f90 (paraview)
+cd paraview
+cp module_to_edit.f90 module.f90
+sed -i "" "s/n_pppppppp/$n_p/g"        ./module.f90
+cd ..
 fi
 
 ## check parameters

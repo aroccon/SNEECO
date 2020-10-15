@@ -1,0 +1,4 @@
+results/
+paraview/output
+input.f90
+paraview/input.f90

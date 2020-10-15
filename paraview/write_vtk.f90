@@ -1,29 +1,20 @@
-subroutine write_output(t,time)
+subroutine write_vtk(t)
 
 use parameters
 use droplets
 integer :: t
-double precision :: time
 character(len=8) :: step
 character(len=40) :: file_name
 
-print*,'Writting output of step',t
+print*,'Creating .vtk file for step',t
 
 !Creating file name
 write(step,'(I8.8)') t
-file_name='output_'//step//'.vtk'
+file_name='outparaview_'//step//'.vtk'
 
 !open file
-open(unit=99,file='results/'//file_name,form='formatted',status='new',action='write')
-
-write(99,*) '% Time.............: ',time
-write(99,*) '% Distribution.....: ',dist_flag
-write(99,*) '% Fluid flag.......: ',fluid_flag
-write(99,*) '% Vaporization flag: ',vap_flag
-write(99,*) ' %     ID      Diameter         X position        Y position         X velocity       Y velocity'
-do i=1,n_p
-  write(99,'(i8,(5(2x,es16.8)))') i,d(i),x(i),y(i),u(i),v(i)
-enddo
+open(unit=99,file='output/'//file_name,form='formatted',status='new',action='write')
+!! Writting to be implemented
 close(99)
 
 return

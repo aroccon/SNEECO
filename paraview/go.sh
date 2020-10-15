@@ -1,18 +1,13 @@
-rm sneeco
+rm make_vtk
 rm *.o
 rm *.mod
-rm -rf results
-mkdir results
+rm -rf output
+mkdir output
 gfortran -c  module.f90
 gfortran -c -o main.o main.f90
-gfortran -c -o droplets_dist.o droplets_dist.f90
-gfortran -c -o droplets_ic.o droplets_ic.f90
-gfortran -c -o read_input.o read_input.f90
-gfortran -c -o vaporization.o vaporization.f90
-gfortran -c -o tracking.o tracking.f90
-gfortran -c -o fluid_vel.o fluid_vel.f90
-gfortran -c -o write_output.o write_output.f90
-gfortran -o sneeco main.o droplets_dist.o droplets_ic.o module.o read_input.o vaporization.o tracking.o fluid_vel.o write_output.o
-./sneeco
+gfortran -c -o read_output.o read_output.f90
+gfortran -c -o write_vtk.o write_vtk.f90
+gfortran -o make_vtk main.o module.o read_output.o write_vtk.o -O3 -Wall
+./make_vtk
 rm *.o
 rm *.mod

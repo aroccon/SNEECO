@@ -1,14 +1,16 @@
 subroutine read_output(t)
 
-integer :: t
+use parameters
+use droplets
+integer :: t,id
 character(len=8) :: step
 character(len=40) :: file_name
 
-print*,'Writting output of step',t
+print*,'Reading output of step     ',t
 
 !Creating file name
 write(step,'(I8.8)') t
-file_name='output_'//step//'.vtk'
+file_name='output_'//step//'.dat'
 
 !open file
 open(unit=99,file='../results/'//file_name,form='formatted',status='old',action='read')
@@ -18,7 +20,10 @@ read(99,*)
 read(99,*)
 read(99,*)
 read(99,*)
-!!! results read (to be implemented)
+!!! results read
+do i=1,n_p
+  read(99,'(i8,(5(2x,es16.8)))') id,d(i),x(i),y(i),u(i),v(i)
+enddo
 
 close(99)
 

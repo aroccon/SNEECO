@@ -11,7 +11,7 @@ print*,'Writting output of step',t
 
 !Creating file name
 write(step,'(I8.8)') t
-file_name='output_'//step//'.dat'
+file_name='output_'//step//'.vtk'
 
 !open file
 open(unit=99,file='results/'//file_name,form='formatted',status='new',action='write')

@@ -2,7 +2,6 @@ program sneeco
 
 use parameters
 use droplets
-integer, parameter :: n_t=50                                    !numero istanti temporali
 integer :: i,j,k,t
 double precision :: time
 
@@ -27,9 +26,9 @@ time=0d0
 print*,'Start temporal loop'
 do t=0,n_t
 
-  time=time+dt
+  if (mod(t,dump).eq.0) call write_output(t,time)
 
-  if (mod(t,dump).eq.0) call write_output(t)
+  time=time+dt
 
   call fluid_vel
 

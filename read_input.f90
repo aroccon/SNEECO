@@ -1,15 +1,17 @@
 subroutine read_input
 
 use parameters
+integer :: dummy
 
-open(unit=66,file='input.f90',form='formatted',status='old',action='read')
+open(unit=64,file='input.f90',form='formatted',status='old',action='read')
 
-read(66,'(i8)') dist_flag
-read(66,'(i8)') fluid_flag
-read(66,'(i8)') vap_flag
-read(66,'(i8)') dump
+read(64,*) dist_flag
+read(64,*) fluid_flag
+read(64,*) vap_flag
+read(64,*) dump
+read(64,*) n_t
 
-close(66)
+close(64)
 
 return
 end

@@ -1,7 +1,7 @@
 module parameters
   implicit none
-  integer, parameter :: n_p=10000
-  integer :: dist_flag,fluid_flag,vap_flag,dump
+  integer, parameter :: n_p=1000
+  integer :: dist_flag,fluid_flag,vap_flag,dump,n_t
   double precision :: dt,rho_g,mu_g,rho_l
 end module parameters
 

@@ -11,6 +11,7 @@ do i=1,n_p
   y(i)=1.6d0
   u(i)=5.d0
   v(i)=0.d0
+  t_d(i)=273d0 + 35d0
 end do
 
 return

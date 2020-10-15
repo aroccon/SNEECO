@@ -29,7 +29,7 @@ do i=1,n_p
   !if (i.eq.1) print*,'rep',rep(i),'v_new',v_new(i),'rhsy',rhsy,'cd',cd
 enddo
 
-
+!update
 do i=1,n_p
   x(i)=x_new(i)
   y(i)=y_new(i)

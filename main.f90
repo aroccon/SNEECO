@@ -19,8 +19,8 @@ call droplets_ic
 dt=0.000001
 rho_g=1.164d0   !! at T_r
 mu_g=1.872e-5
-rho_l=1000
-g=9.81
+rho_l=1000d0
+g=9.81d0
 !! 1/3 rule, properties evaluated at T_r=t_s + 1/3* (T_inf - T_s)
 !! T_inf=20 *** T_s=35 *** T_r=30
 diff_vap_air=2.4e-5

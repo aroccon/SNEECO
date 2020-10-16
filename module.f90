@@ -1,7 +1,7 @@
 module parameters
   implicit none
   double precision, parameter :: pi = 3.1415927
-  integer, parameter :: n_p=1000
+  integer, parameter :: n_p=100
   integer :: dist_flag,fluid_flag,vap_flag,dump,n_t
   double precision :: dt,rho_g,mu_g,rho_l,g
   double precision :: sc,pr
@@ -22,4 +22,5 @@ module droplets
   double precision :: u_new(n_p),v_new(n_p)
   double precision :: rhsx(n_p),rhsy(n_p)
   double precision :: u_f(n_p),v_f(n_p)
+  double precision :: bm(n_p),bt(n_p)
 end module droplets

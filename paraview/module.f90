@@ -1,6 +1,6 @@
 module parameters
   implicit none
-  integer, parameter :: n_p=1000
+  integer, parameter :: n_p=100
   integer :: dump,n_t
 end module parameters
 

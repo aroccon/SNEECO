@@ -88,6 +88,11 @@ if (dist_flag.eq.0) then
 
 end if
 
+!!backup of the initial distribution (for vaporization)
+do i=1,n_p
+  d_0(i)=d(i)
+end do
+
 !do i=1,n_p
 !  print*,'d(i)',d(i)
 !enddo

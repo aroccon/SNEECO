@@ -19,7 +19,8 @@ print*,'Tracking droplets      - step',t
 do i=1,n_p
   rep(i)=rho_g*d(i)*sqrt((u(i)-u_f(i))**2 + (v(i)-v_f(i))**2)/mu_g
   !if (i.eq.1) print*,'rep',rep(i)
-  if (isnan(rep(i))) stop 'Instability-----STOP STOP STOP'
+  !if (isnan(rep(i))) stop 'Instability-----STOP STOP STOP'
+  !if (rep(i).gt.10.d0) print*, 'i',i,'rep',rep(i),'Rep too large-----STOP STOP STOP'
   f_corr=1d0 + 0.15d0*rep(i)**(0.687d0)
   !if (i.eq.1) print*,'f_corr',f_corr
   taup(i)=rho_l*d(i)**2d0/(18*mu_g)

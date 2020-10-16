@@ -8,18 +8,19 @@ integer :: i,t
 print*,'Computing vaporization - step',t
 do i=1,n_p
   call compute_sh_nu(i)
+  !if (i.eq.1) print*,'sh',sh(i),'nu',nu(i)
   m(i)=rho_l*pi/6d0*d(i)**3d0
   rhsm(i)=-(1d0/3d0)*(m(i)/taup(i))*(sh(i)/sc)*log(1d0+bm(i))
   m_new(i)=m(i) + rhsm(i)*dt
   m(i)=m_new(i)
   d_new(i)=((6d0*m(i))/(rho_l*pi))**(1d0/3d0)
-  if (i.eq.1) print*,'d_new/d_0',d_new(i)/d_0(i)
-  if (i.eq.1) print*,'rhsm(i)',rhsm(i)
-  if (d_new(i)/d_0(i).gt. min_d) then
+  print*,'d_new/d_0',d_new(i)/d_0(i),'rhsm(i)',rhsm(i),'sh',sh(i),'nu',nu(i)
+  if (d_new(i)/d_0(i).lt.min_d) then
     d(i)=d_new(i)           !!! dropleta above threeshold
   else
     d(i)=min_d*d_0(i)    !!! dropleta below threeshold -- stop evaporation
   end if
+  !if (i.eq.1) print*,'d(i)',d(i)
 end do
 
 return
@@ -45,8 +46,8 @@ double precision :: p_ws,x_vs,y_vs
 double precision :: fm,ft
 integer :: i
 
-sh_zero=2d0+0.552*(rep(i)**05d0)*(sc**(1d0/3d0))
-nu_zero=2d0+0.552*(rep(i)**05d0)*(pr**(1d0/3d0))
+sh_zero=2d0+0.552*(rep(i)**0.5d0)*(sc**(1d0/3d0))
+nu_zero=2d0+0.552*(rep(i)**0.5d0)*(pr**(1d0/3d0))
 !! computing the vapor molar fraction
 p_ws=133d0*exp(20.386-5132d0/t_d(i)) !!pressure saturation in pascal
 x_vs=p_ws/p_zero
@@ -56,8 +57,8 @@ fm=((1d0+bm(i))**0.7d0)*log(1d0+bm(i))/bm(i)
 bt(i)=cp_vapor*(t_inf-t_d(i))/latent_heat
 ft=((1d0+bt(i))**0.7d0)*log(1d0+bt(i))/bt(i)
 !! sherwood and nusselt computed
-sh(i)=2+(sh_zero-2d0)/fm
-nu(i)=2+(nu_zero-2d0)/ft
+sh(i)=2d0+(sh_zero-2d0)/fm
+nu(i)=2d0+(nu_zero-2d0)/ft
 
 
 return

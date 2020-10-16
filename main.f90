@@ -55,6 +55,7 @@ print*,'Start temporal loop'
 do t=1,n_t
 
   time=time+dt
+  print*,'Time:',time
 
   call fluid_vel
 

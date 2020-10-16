@@ -8,19 +8,18 @@ integer :: i,t
 print*,'Computing vaporization - step',t
 do i=1,n_p
   call compute_sh_nu(i)
-  !if (i.eq.1) print*,'sh',sh(i),'nu',nu(i)
   m(i)=rho_l*pi/6d0*d(i)**3d0
   rhsm(i)=-(1d0/3d0)*(m(i)/taup(i))*(sh(i)/sc)*log(1d0+bm(i))
   m_new(i)=m(i) + rhsm(i)*dt
   m(i)=m_new(i)
   d_new(i)=((6d0*m(i))/(rho_l*pi))**(1d0/3d0)
-  print*,'d_new/d_0',d_new(i)/d_0(i),'rhsm(i)',rhsm(i),'sh',sh(i),'nu',nu(i)
-  if (d_new(i)/d_0(i).lt.min_d) then
-    d(i)=d_new(i)           !!! dropleta above threeshold
+  if ((d_new(i)/d_0(i)).lt.min_d) then
+    d(i)=min_d*d_0(i)           !!! dropleta below threeshold
   else
-    d(i)=min_d*d_0(i)    !!! dropleta below threeshold -- stop evaporation
+    d(i)=d_new(i)   !!! dropleta below threeshold -- stop evaporation
   end if
-  !if (i.eq.1) print*,'d(i)',d(i)
+  !debug
+  !print*,'d_new/d_0',d(i)/d_0(i),'rhsm(i)',rhsm(i),'sh',sh(i),'nu',nu(i)
 end do
 
 return

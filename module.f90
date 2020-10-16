@@ -5,7 +5,7 @@ module parameters
   integer :: dist_flag,fluid_flag,vap_flag,dump,n_t
   double precision :: dt,rho_g,mu_g,rho_l,g
   double precision :: sc,pr
-  double precision :: diff_vap_air,cp_air,cp_vapor,kappa,p_zero,y_inf
+  double precision :: diff_vap_air,cp_air,cp_vapor,kappa,p_zero,y_inf,min_d
   double precision :: t_ref,latent_heat,vapor_gas_constant,t_inf,wg,wl
 end module parameters
 

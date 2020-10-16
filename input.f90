@@ -2,4 +2,4 @@
 0 !!! Fluid velocity 0-off
 1 !!! Evaporation 0-off
 10 !!! Dump of particle location/velocity/diameter
-1000 !!! Final time step
+4000 !!! Final time step

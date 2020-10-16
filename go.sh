@@ -5,7 +5,7 @@ dist_flag="0"       #### Distribution 0-Lognormal
 fluid_flag="0"      #### Fluid velocity 0-off
 vap_flag="1"        #### Evaporation 0-off
 dump="10"           #### Dump of particle location/velocity/diameter (not zero please)
-n_t="1000"           #### Final time step
+n_t="4000"           #### Final time step
 n_p="100"          #### Number of particles
 
 ##MAC

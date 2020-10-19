@@ -16,10 +16,14 @@ do i=1,n_p
   if ((d_new(i)/d_0(i)).lt.min_d) then
     d(i)=min_d*d_0(i)           !!! dropleta below threeshold
   else
-    d(i)=d_new(i)   !!! dropleta below threeshold -- stop evaporation
+    d(i)=d_new(i)   !!! droplets below threeshold -- stop evaporation
   end if
   !debug
-  !print*,'d_new/d_0',d(i)/d_0(i),'rhsm(i)',rhsm(i),'sh',sh(i),'nu',nu(i)
+  print*,'d_new/d_0',d(i)/d_0(i),'rhsm(i)',rhsm(i),'sh',sh(i),'nu',nu(i)
+  if (temp_flag.eq.1) then
+    print*,'Computing temperature - step ',t
+
+    end if
 end do
 
 return
@@ -48,12 +52,12 @@ integer :: i
 sh_zero=2d0+0.552*(rep(i)**0.5d0)*(sc**(1d0/3d0))
 nu_zero=2d0+0.552*(rep(i)**0.5d0)*(pr**(1d0/3d0))
 !! computing the vapor molar fraction
-p_ws=133d0*exp(20.386-5132d0/t_d(i)) !!pressure saturation in pascal
+p_ws=133d0*exp(20.386-5132d0/temp(i)) !!pressure saturation in pascal
 x_vs=p_ws/p_zero
 y_vs=x_vs/(x_vs + (1d0 - x_vs)*(wg/wl))
 bm(i)=(y_vs-y_inf)/(1d0-y_vs)
 fm=((1d0+bm(i))**0.7d0)*log(1d0+bm(i))/bm(i)
-bt(i)=cp_vapor*(t_inf-t_d(i))/latent_heat
+bt(i)=cp_vapor*(t_inf-temp(i))/latent_heat
 ft=((1d0+bt(i))**0.7d0)*log(1d0+bt(i))/bt(i)
 !! sherwood and nusselt computed
 sh(i)=2d0+(sh_zero-2d0)/fm

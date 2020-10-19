@@ -3,9 +3,10 @@
 machine="0"         #### 0=OS X
 dist_flag="0"       #### Distribution 0-Lognormal
 fluid_flag="0"      #### Fluid velocity 0-off
-vap_flag="1"        #### Evaporation 0-off
+vap_flag="1"        #### Evaporation 0-off 1-on
+temp_flag="1"       #### Temperatur flag 0-off 1-on
 dump="10"           #### Dump of particle location/velocity/diameter (not zero please)
-n_t="4000"           #### Final time step
+n_t="1000"           #### Final time step
 n_p="100"          #### Number of particles
 
 ##MAC
@@ -15,6 +16,7 @@ cp input_to_edit.f90 input.f90
 sed -i "" "s/dist_flag/$dist_flag/g"   ./input.f90
 sed -i "" "s/fluid_flag/$fluid_flag/g" ./input.f90
 sed -i "" "s/vap_flag/$vap_flag/g"     ./input.f90
+sed -i "" "s/temp_flag/$temp_flag/g"   ./input.f90
 sed -i "" "s/dump/$dump/g"             ./input.f90
 sed -i "" "s/n_t/$n_t/g"               ./input.f90
 ### copy input in paraview
@@ -49,8 +51,8 @@ gfortran -c -o read_input.o read_input.f90
 gfortran -c -o vaporization.o vaporization.f90
 gfortran -c -o tracking.o tracking.f90
 gfortran -c -o fluid_vel.o fluid_vel.f90
-gfortran -c -o write_output.o write_output.f90
-gfortran -o sneeco main.o droplets_dist.o droplets_ic.o module.o read_input.o vaporization.o tracking.o fluid_vel.o write_output.o -O3 -Wall
+gfortran -c -ffree-line-length-none -o write_output.o write_output.f90
+gfortran -O3 -Wall -o sneeco main.o droplets_dist.o droplets_ic.o module.o read_input.o vaporization.o tracking.o fluid_vel.o write_output.o
 ./sneeco
 rm *.o
 rm *.mod

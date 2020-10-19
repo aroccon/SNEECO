@@ -111,7 +111,7 @@ end
 
 subroutine bubble_sort
 use droplets
-double precision :: temp
+double precision :: tmp
 integer :: i,j
 logical :: swapped
 
@@ -119,9 +119,9 @@ logical :: swapped
     swapped = .false.
     do i = 1, j
       if (d(i) > d(i+1)) then
-        temp = d(i)
+        tmp = d(i)
         d(i) = d(i+1)
-        d(i+1) = temp
+        d(i+1) = tmp
         swapped = .true.
       end if
     end do

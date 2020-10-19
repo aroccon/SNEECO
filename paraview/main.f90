@@ -10,13 +10,16 @@ open(unit=64,file='../input.f90',form='formatted',status='old',action='read')
 read(64,*) dummy
 read(64,*) dummy
 read(64,*) dummy
+read(64,*) dummy
 read(64,*) dump
 read(64,*) n_t
 close(64)
 
+!!print*,'dump',dump
+!!print*,'n_t',n_t
 !!Read output from code
 !! Start temporal loop
-do t=0,dump,n_t
+do t=0,n_t,dump
 
   call read_output(t)
 

@@ -20,10 +20,10 @@ read(99,*)
 read(99,*)
 read(99,*)
 read(99,*)
-read(99.*)
+read(99,*)
 !!! results read
 do i=1,n_p
-  read(99,'(i8,(5(2x,es16.8)))') id,d(i),x(i),y(i),u(i),v(i),m(i),temp(i)
+  read(99,'(i8,(7(2x,es16.8)))') id,d(i),x(i),y(i),u(i),v(i),m(i),temp(i)
 enddo
 
 close(99)

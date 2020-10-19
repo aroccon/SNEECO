@@ -26,7 +26,8 @@ g=9.81d0
 diff_vap_air=2.4e-5
 cp_air=1007d0
 cp_vapor=1867d0
-kappa=0.02588d0
+cp_water=4110d0
+kappa_g=0.02588d0
 t_ref=273d0+30d0
 t_inf=273d0+20d0
 latent_heat=2429000d0 !! J/kg
@@ -37,13 +38,15 @@ wl=0.01801d0 !! kg/mol
 p_zero=1e5 !! Pascal
 y_inf=0.007333 !! vapor mass fraction RH50% and 20C
 sc=mu_g/(rho_g*diff_vap_air)
-pr=mu_g*cp_air/kappa
+pr=mu_g*cp_air/kappa_g
+le=kappa_g/(rho_g*diff_vap_air*cp_air)
 min_d=0.3d0 !! minimal diameter (dimensionless)
 
 
 if (vap_flag .eq. 1) then
   print*,'Schmidt number:', sc
   print*,'Prandtl number:', pr
+  print*,'Lewis   number:', le
 endif
 
 !! Writting initial fields

@@ -42,6 +42,9 @@ pr=mu_g*cp_air/kappa_g
 le=kappa_g/(rho_g*diff_vap_air*cp_air)
 min_d=0.3d0 !! minimal diameter (dimensionless)
 
+!debug
+!d(1)=1.e-5
+
 
 if (vap_flag .eq. 1) then
   print*,'Schmidt number....:', sc

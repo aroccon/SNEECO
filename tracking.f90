@@ -30,6 +30,8 @@ do i=1,n_p
   v(i)=v_new(i)
 enddo
 
+!print*,'x',x(1),'y',y(1)
+
 return
 end
 

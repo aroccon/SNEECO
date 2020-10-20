@@ -36,14 +36,14 @@ if (dist_flag.eq.0) then
   enddo
   n_tot=sum(n_drop)
   allocate(d1(n_tot))
-  d1=0d0
+  d1(:)=0d0
   k=0
   do i=1,n_c-1
     a = d_c(i)
     b = d_c(i+1)
     do j=1,n_drop(i)
       k=k+1
-      call random_number(d(k))
+      call random_number(d1(k))
       d1(k)=(b-a)*d1(k) + a
     end do
   end do

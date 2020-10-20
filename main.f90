@@ -44,9 +44,9 @@ min_d=0.3d0 !! minimal diameter (dimensionless)
 
 
 if (vap_flag .eq. 1) then
-  print*,'Schmidt number:', sc
-  print*,'Prandtl number:', pr
-  print*,'Lewis   number:', le
+  print*,'Schmidt number....:', sc
+  print*,'Prandtl number....:', pr
+  print*,'Lewis number......:', le
 endif
 
 !! Writting initial fields

@@ -67,9 +67,8 @@ sh(i)=2d0+(sh_zero-2d0)/fm
 !!thermal part
 nu_zero=2d0+0.552*(rep(i)**0.5d0)*(pr**(1d0/3d0))
 if (t .eq. 1) then
-  bt_old(i)=0.13d0
-end if
-if (t .gt. 1) then
+  bt_old(i)=cp_vapor*(t_inf-temp(i))/latent_heat
+else
   bt_old(i)=bt(i)
 end if
 !print*,'bt_old',bt_old(i)

@@ -8,7 +8,7 @@ integer :: i,t
 !! new position
 do i=1,n_p
   x_new(i)=x(i) + u(i)*dt
-  y_new(i)=x(i) + v(i)*dt
+  y_new(i)=y(i) + v(i)*dt
   ! update position
   x(i)=x_new(i)
   y(i)=y_new(i)

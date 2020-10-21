@@ -21,6 +21,7 @@ rho_g=1.164d0   !! at T_r
 mu_g=1.872e-5
 rho_l=1000d0
 g=9.81d0
+u_0=10d0 !!initial velocity
 !! 1/3 rule, properties evaluated at T_r=t_s + 1/3* (T_inf - T_s)
 !! T_inf=20 *** T_s=35 *** T_r=30
 diff_vap_air=2.4e-5
@@ -58,6 +59,7 @@ endif
 
 !! Writting initial fields
 time=0d0
+print*,'Time:',time
 call write_output(0,time)
 
 !!Start temporal loop
@@ -65,7 +67,6 @@ print*,'Start temporal loop'
 do t=1,n_t
 
   time=time+dt
-  print*,'Time:',time
 
   if (fluid_flag.eq.1) call fluid_vel(t)
 

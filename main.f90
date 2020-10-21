@@ -42,6 +42,10 @@ pr=mu_g*cp_air/kappa_g
 le=kappa_g/(rho_g*diff_vap_air*cp_air)
 min_d=0.3d0 !! minimal diameter (dimensionless)
 
+! fluid velocity init
+u_f=0.d0
+v_f=0.d0
+
 !debug
 !d(1)=1.e-5
 
@@ -63,7 +67,7 @@ do t=1,n_t
   time=time+dt
   print*,'Time:',time
 
-  call fluid_vel
+  if (fluid_flag.eq.1) call fluid_vel(t)
 
   call tracking(t)
 

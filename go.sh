@@ -2,11 +2,11 @@
 #Parameters
 machine="0"         #### 0=OS X 1=UNIX
 dist_flag="0"       #### Distribution 0-Lognormal
-fluid_flag="0"      #### Fluid velocity 0-off
+fluid_flag="1"      #### Fluid velocity 0-off
 vap_flag="0"        #### Evaporation 0-off 1-on
 temp_flag="0"       #### Temperatur flag 0-off 1-on
 dump="1000"           #### Dump of particle location/velocity/diameter (not zero please)
-n_t="1000"           #### Final time step
+n_t="10"           #### Final time step
 n_p="1000"          #### Number of particles
 
 ##MAC

@@ -31,32 +31,20 @@ if (t.eq.1) then
   !!! center line velocity
   x_0=6.2d0*d_inlet
   do i=1,n_x
-    u_c(i)=u_0*6.2*((x_r(i)+x_0)/d_inlet)**(-1d0)
-    b(i)=beta*x(i)
+    u_c(i)=u_0*(7.2d0/6.2d0)*6.2d0*((x_r(i)+x_0+d_inlet)/d_inlet)**(-1d0)
+    b(i)=beta*(x_r(i)+d_inlet)
   end do
   !!
+  rb(:,:)=0d0
   do i=1,n_x
     do j=1,n_y
-      rb(i,j)=(y(j)-y_0)/b(i)
-      if (i.eq.1) rb(i,j)=0d0
+      rb(i,j)=(y_r(j)-y_0)/b(i)
       u_r(i,j)=u_c(i)*exp(-rb(i,j)**2d0)
-      v_r(i,j)=abs(alpha*u_c(i)*(1-exp(-rb(i,j)**2d0)-(beta/alpha)*(rb(i,j)**2d0)*exp(-rb(i,j)**2d0))/rb(i,j))
-    end do
-  end do
-  !! top hat filter + center line
-  do i=1,n_x
-    do j=1,n_y
-        if (abs(y(j)-y_0) .gt. 0.16d0*x(i)) then
-            u_r(i,j)=0d0
-            v_r(i,j)=0d0
-        end if
-        if (isnan(u_r(i,j))) u_r(i,j)=0d0
-        if (isnan(v_r(i,j))) v_r(i,j)=0d0
+      v_r(i,j)=abs(alpha*u_c(i)*(1d0-exp(-rb(i,j)**2d0)-(beta/alpha)*(-rb(i,j)**2d0)*exp(-rb(i,j)**2d0))/rb(i,j))
     end do
   end do
   call write_output_flow
 end if
-!! check for nan?
 
 !! no init required
 
@@ -90,7 +78,7 @@ file_name='output_u.dat'
 
 open(unit=99,file='results/'//file_name,form='formatted',status='new',action='write')
 do i=1,n_x
- write(99, '(2x,es16.8)')(u_r(i,j),j=1,n_y) !! not matrix?
+ write(99,'(*(es16.8e3))')(u_r(i,j),j=1,n_y) !! not matrix?
 end do
 close(99)
 
@@ -99,7 +87,7 @@ file_name='output_v.dat'
 
 open(unit=99,file='results/'//file_name,form='formatted',status='new',action='write')
 do i=1,n_x
- write(99, '(2x,es16.8)')(v_r(i,j),j=1,n_y) !! not matrix?
+ write(99,'(*(es16.8e3))')(v_r(i,j),j=1,n_y) !! not matrix?
 end do
 close(99)
 

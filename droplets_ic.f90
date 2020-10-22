@@ -7,8 +7,8 @@ integer i
 print*,'Setting droplets initial conditions'
 
 do i=1,n_p
-  x(i)=0.d0
-  y(i)=y_0
+  x(i)=0.65d0
+  y(i)=y_0*0.5d0
   u(i)=u_0
   v(i)=0d0
   temp(i)=273d0 + 35d0

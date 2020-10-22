@@ -56,6 +56,12 @@ if (t.eq.1) then
       end if
     end do
   end do
+  do i=1,n_x
+    do j=1,n_y
+      u_r(i,j)=x_r(i)
+      v_r(i,j)=y_r(j)
+    end do
+  end do
   call write_output_flow
 end if
 

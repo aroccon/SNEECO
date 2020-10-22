@@ -2,6 +2,7 @@ program sneeco
 
 use parameters
 use droplets
+implicit none
 integer :: i,j,k,t
 double precision :: time
 
@@ -10,10 +11,6 @@ double precision :: time
 print*,"SNEECO - LPT of C19 droplets"
 
 call read_input
-
-call droplets_dist
-
-call droplets_ic
 
 !! LPT parameters
 dt=0.000001
@@ -48,9 +45,9 @@ min_d=0.3d0 !! minimal diameter (dimensionless)
 u_f=0.d0
 v_f=0.d0
 
-!debug
-!d(1)=1.e-5
+call droplets_dist
 
+call droplets_ic
 
 if (vap_flag .eq. 1) then
   print*,'Schmidt number....:', sc

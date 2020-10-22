@@ -2,7 +2,7 @@ module parameters
   implicit none
   double precision, parameter :: pi = 3.1415927
   integer, parameter :: n_x=1000,n_y=1000
-  integer, parameter :: n_p=1000
+  integer, parameter :: n_p=10
   integer :: dist_flag,fluid_flag,vap_flag,temp_flag,dump,n_t
   double precision :: dt,rho_g,mu_g,rho_l,g
   double precision :: u_0,y_0,x_0

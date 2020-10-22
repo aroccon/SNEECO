@@ -6,8 +6,8 @@ fluid_flag="1"      #### Fluid velocity 0-off
 vap_flag="0"        #### Evaporation 0-off 1-on
 temp_flag="0"       #### Temperatur flag 0-off 1-on
 dump="1000"           #### Dump of particle location/velocity/diameter (not zero please)
-n_t="10"           #### Final time step
-n_p="1000"          #### Number of particles
+n_t="1"           #### Final time step
+n_p="10"          #### Number of particles
 
 ##MAC
 if [ "$machine" == "0" ]; then

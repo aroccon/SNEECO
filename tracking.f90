@@ -13,6 +13,7 @@ do i=1,n_p
   x(i)=x_new(i)
   y(i)=y_new(i)
 enddo
+  
 
 print*,'Tracking droplets      - step',t
 

@@ -56,14 +56,16 @@ if (t.eq.1) then
       end if
     end do
   end do
-  do i=1,n_x
-    do j=1,n_y
-      u_r(i,j)=x_r(i)
-      v_r(i,j)=y_r(j)
-    end do
-  end do
+  ! flow field interpolation debug
+  !do i=1,n_x
+  !  do j=1,n_y
+  !    u_r(i,j)=x_r(i)
+  !    v_r(i,j)=y_r(j)
+  !  end do
+  !end do
   call write_output_flow
 end if
+
 
 !! flow field already initialized
 !! loop on the particles
@@ -84,7 +86,7 @@ do i=1,n_p
   xp=(ip-1)*dx
   ym=(jm-1)*dy
   yp=(jp-1)*dy
-  print*,'xm',xm,'xp',xp,'ym',ym,'yp',yp
+  !!print*,'xm',xm,'xp',xp,'ym',ym,'yp',yp debug
   !!! computing lagrangina polynomials
   ustencil(1,1)=u_r(im,jm)
   ustencil(1,2)=u_r(im,jp)
@@ -94,10 +96,10 @@ do i=1,n_p
   vstencil(1,2)=v_r(im,jp)
   vstencil(2,1)=v_r(ip,jm)
   vstencil(2,2)=v_r(ip,jp)
-  !print*,'ust(1,1)',ustencil(1,1),'br',u_r(1,750)
-  !print*,'ust(1,2)',ustencil(1,2),'br',u_r(1,751)
-  !print*,'ust(2,1)',ustencil(2,1),'br',u_r(2,750)
-  !print*,'ust(2,2)',ustencil(2,2),'br',u_r(2,751)
+  !print*,'ust(1,1)',ustencil(1,1),'br',u_r(1,750) debug
+  !print*,'ust(1,2)',ustencil(1,2),'br',u_r(1,751) debug
+  !print*,'ust(2,1)',ustencil(2,1),'br',u_r(2,750) debug
+  !print*,'ust(2,2)',ustencil(2,2),'br',u_r(2,751) debug
   pl(:,:)=0d0
   pl(1,1)=(x(i)-xp)/(xm-xp)
   pl(1,2)=(x(i)-xm)/(xp-xm)
@@ -111,7 +113,7 @@ do i=1,n_p
       v_f(i)=v_f(i) + vstencil(n,l)*pl(1,n)*pl(2,l)
     end do
   end do
-  print*,'u_f',u_f(i),'v_f',v_f(i)
+!  print*,'u_f',u_f(i),'v_f',v_f(i) debug
 end do
 
 

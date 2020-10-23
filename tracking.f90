@@ -12,8 +12,9 @@ do i=1,n_p
   ! update position
   x(i)=x_new(i)
   y(i)=y_new(i)
+  if (y(i).le.0d0) y(i)=0d0 !deposition on the bottom boudary
 enddo
-  
+
 
 print*,'Tracking droplets      - step',t
 
@@ -29,6 +30,7 @@ do i=1,n_p
   !update velocity
   u(i)=u_new(i)
   v(i)=v_new(i)
+  if (y(i).le.0d0) v(i)=0d0 !deposition on the bottom boudary, no velocity.
 enddo
 
 !print*,'x',x(1),'y',y(1)

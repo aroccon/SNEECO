@@ -41,9 +41,11 @@ pr=mu_g*cp_air/kappa_g
 le=kappa_g/(rho_g*diff_vap_air*cp_air)
 min_d=0.3d0 !! minimal diameter (dimensionless)
 
-! fluid velocity init
+! fluid velocity init (at particle position and general flow field)
 u_f=0.d0
 v_f=0.d0
+
+if (fluid_flag.eq.1) call fluid_vel(t)
 
 call droplets_dist
 

@@ -21,9 +21,9 @@ write(99,*) '% Distribution.....: ',dist_flag
 write(99,*) '% Fluid flag.......: ',fluid_flag
 write(99,*) '% Vaporization flag: ',vap_flag
 write(99,*) '% Temperature flag.: ',temp_flag
-write(99,*) '%    ID      Diameter         X position        Y position        X velocity       Y velocity           Mass            Temperature'
+write(99,*) ' %    ID      Diameter         X position        Y position        X velocity         Y velocity       X Fluid vel.      Y Fluid vel.          Mass          Temperature'
 do i=1,n_p
-  write(99,'(i8,(7(2x,es16.8)))') i,d(i),x(i),y(i),u(i),v(i),m(i),temp(i)
+  write(99,'(i8,(9(2x,es16.8)))') i,d(i),x(i),y(i),u(i),v(i),u_f(i),v_f(i),m(i),temp(i)
 enddo
 close(99)
 

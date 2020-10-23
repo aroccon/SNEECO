@@ -11,9 +11,6 @@ double precision :: d_inlet,alpha,beta
 double precision :: xm,xp,ym,yp,pl(2,2)
 double precision :: ustencil(2,2),vstencil(2,2)
 
-alpha=0.057d0
-beta=0.114d0
-d_inlet=0.02
 
 !! common for all cicles.
 lx=2d0
@@ -29,35 +26,49 @@ do i=2,n_y
   y_r(i)=y_r(i-1)+dy
 end do
 
+!! reset
+u_f=0.d0
+v_f=0.d0
 
 !! generate initial flow field (only 1st iteration)
 if (t.eq.0) then
-  !! grid defintion
-  !!! start flow field init
-  !!! center line velocity
-  x_0=6.2d0*d_inlet
-  do i=1,n_x
-    u_c(i)=u_0*(7.2d0/6.2d0)*6.2d0*((x_r(i)+x_0+d_inlet)/d_inlet)**(-1d0)
-    b(i)=beta*(x_r(i)+d_inlet)
-  end do
+  !! zero velocity field
+  if (fluid_flag.eq.0) then
+    u_r(:,:)=0d0
+    v_r(:,:)=0d0
+    call write_output_flow
+  end if
+  !!!!
+  if (fluid_flag.eq.1) then
+    !!! non-zero flow field
+    alpha=0.057d0
+    beta=0.114d0
+    d_inlet=0.02
+    x_0=6.2d0*d_inlet
+    do i=1,n_x
+      u_c(i)=u_0*(7.2d0/6.2d0)*6.2d0*((x_r(i)+x_0+d_inlet)/d_inlet)**(-1d0)
+      b(i)=beta*(x_r(i)+d_inlet)
+    end do
   !!
-  rb(:,:)=0d0
-  do i=1,n_x
-    do j=1,n_y
-      rb(i,j)=(y_r(j)-y_0)/b(i)
-      u_r(i,j)=u_c(i)*exp(-rb(i,j)**2d0)
-      v_r(i,j)=abs(alpha*u_c(i)*(1d0-exp(-rb(i,j)**2d0)-(beta/alpha)*(-rb(i,j)**2d0)*exp(-rb(i,j)**2d0))/rb(i,j))
+    rb(:,:)=0d0
+    do i=1,n_x
+      do j=1,n_y
+        rb(i,j)=(y_r(j)-y_0)/b(i)
+        u_r(i,j)=u_c(i)*exp(-rb(i,j)**2d0)
+        v_r(i,j)=abs(alpha*u_c(i)*(1d0-exp(-rb(i,j)**2d0)-(beta/alpha)*(-rb(i,j)**2d0)*exp(-rb(i,j)**2d0))/rb(i,j))
+      end do
     end do
-  end do
-  !! top hat filter + center line
-  do i=1,n_x
-    do j=1,n_y
-      if (abs(y_r(j)-y_0) .ge. 0.16d0*(x_r(i)+d_inlet)) then
-         u_r(i,j)=0d0
-         v_r(i,j)=0d0
-      end if
+    !! top hat filter + center line
+    do i=1,n_x
+      do j=1,n_y
+        if (abs(y_r(j)-y_0) .ge. 0.16d0*(x_r(i)+d_inlet)) then
+          u_r(i,j)=0d0
+          v_r(i,j)=0d0
+        end if
+      end do
     end do
-  end do
+  end if
+
   ! flow field interpolation debug
   !do i=1,n_x
   !  do j=1,n_y

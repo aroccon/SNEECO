@@ -40,7 +40,6 @@ sc=mu_g/(rho_g*diff_vap_air)
 pr=mu_g*cp_air/kappa_g
 le=kappa_g/(rho_g*diff_vap_air*cp_air)
 min_d=0.3d0 !! minimal diameter (dimensionless)
-
 ! fluid velocity init (at particle position and general flow field)
 u_f=0.d0
 v_f=0.d0
@@ -50,7 +49,7 @@ call droplets_dist
 
 call droplets_ic
 
-if (fluid_flag.eq.1) call fluid_vel(0)
+call fluid_vel(0) !init velocity for 0-field or mean field
 
 if (vap_flag .eq. 1) then
   print*,'Schmidt number....:', sc

@@ -15,22 +15,24 @@ alpha=0.057d0
 beta=0.114d0
 d_inlet=0.02
 
+!! common for all cicles.
+lx=2d0
+ly=2d0
+dx=lx/(n_x-1)
+dy=ly/(n_y-1)
+x_r(1)=0d0
+y_r(1)=0d0
+do i=2,n_x
+  x_r(i)=x_r(i-1)+dx
+end do
+do i=2,n_y
+  y_r(i)=y_r(i-1)+dy
+end do
+
 
 !! generate initial flow field (only 1st iteration)
-if (t.eq.1) then
+if (t.eq.0) then
   !! grid defintion
-  lx=2d0
-  ly=2d0
-  dx=lx/(n_x-1)
-  dy=ly/(n_y-1)
-  x_r(1)=0d0
-  y_r(1)=0d0
-  do i=2,n_x
-    x_r(i)=x_r(i-1)+dx
-  end do
-  do i=2,n_y
-    y_r(i)=y_r(i-1)+dy
-  end do
   !!! start flow field init
   !!! center line velocity
   x_0=6.2d0*d_inlet
@@ -65,7 +67,6 @@ if (t.eq.1) then
   !end do
   call write_output_flow
 end if
-
 
 !! flow field already initialized
 !! loop on the particles

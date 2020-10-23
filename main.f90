@@ -44,12 +44,13 @@ min_d=0.3d0 !! minimal diameter (dimensionless)
 ! fluid velocity init (at particle position and general flow field)
 u_f=0.d0
 v_f=0.d0
-
-if (fluid_flag.eq.1) call fluid_vel(t)
+time=0d0
 
 call droplets_dist
 
 call droplets_ic
+
+if (fluid_flag.eq.1) call fluid_vel(0)
 
 if (vap_flag .eq. 1) then
   print*,'Schmidt number....:', sc
@@ -58,7 +59,6 @@ if (vap_flag .eq. 1) then
 endif
 
 !! Writting initial fields
-time=0d0
 print*,'Time:',time
 call write_output(0,time)
 
